@@ -1,19 +1,19 @@
 parameters:
-	templating.engine.twig.class: Symfony\Bridge\Twig\TwigEngine
-	templating.engine.twig.environment.class: Twig_Environment
-	templating.engine.twig.loader.class: Twig_Loader_Filesystem
+    templating.engine.twig.class: Symfony\Bridge\Twig\TwigEngine
+    templating.engine.twig.environment.class: Twig_Environment
+    templating.engine.twig.loader.class: Twig_Loader_Filesystem
 
 services:
-	templating.engine.twig:
-		class: %templating.engine.twig.class%
-		arguments: [ @templating.twig.environment, @templating.name_parser]
-		tags:
-			- { name: templating_engine }
+    templating.engine.twig:
+        class: %templating.engine.twig.class%
+        arguments: [ @templating.engine.twig.environment, @templating.name_parser]
+        tags:
+            - { name: templating_engine }
 
-	templating.engine.twig.environment:
-		class: %templating.engine.twig.environment.class%
-		arguments: [ @templating.twig.loader ]
+    templating.engine.twig.environment:
+        class: %templating.engine.twig.environment.class%
+        arguments: [ @templating.engine.twig.loader ]
 
-	templating.engine.twig.loader:
-		class: %templating.engine.twig.loader.class%
-		arguments: [ %templating.root_dir% ]
+    templating.engine.twig.loader:
+        class: %templating.engine.twig.loader.class%
+        arguments: [ %templating.root_dir% ]
