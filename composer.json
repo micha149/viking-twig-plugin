@@ -1,0 +1,13 @@
+{
+    "name": "viking/twig-plugin",
+    "type": "viking-plugin",
+    "authors": [
+        {
+            "name": "Michael van Engelshoven",
+            "email": "michael@van-engelshoven.de"
+        }
+    ],
+    "require": {
+        "symfony/twig-bridge": "~2.5"
+    }
+}
