@@ -2,6 +2,7 @@ parameters:
     templating.engine.twig.class: Symfony\Bridge\Twig\TwigEngine
     templating.engine.twig.environment.class: Twig_Environment
     templating.engine.twig.loader.class: Twig_Loader_Filesystem
+    templating.engine.twig.debug_extension.class: Twig_Extension_Debug
 
 services:
     templating.engine.twig:
@@ -12,8 +13,13 @@ services:
 
     templating.engine.twig.environment:
         class: %templating.engine.twig.environment.class%
-        arguments: [ @templating.engine.twig.loader ]
+        arguments: [ @templating.engine.twig.loader, [ debug: true] ]
+        calls:
+            - ['addExtension', [@templating.engine.twig.debug_extension]]
 
     templating.engine.twig.loader:
         class: %templating.engine.twig.loader.class%
         arguments: [ %templating.root_dir% ]
+
+    templating.engine.twig.debug_extension:
+        class: %templating.engine.twig.debug_extension.class%
