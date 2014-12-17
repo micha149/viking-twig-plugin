@@ -5,6 +5,7 @@ namespace Viking;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Viking\Plugin\Plugin;
 
 /**
@@ -31,5 +32,11 @@ class TwigPlugin extends Plugin {
     {
         $configLoader = new YamlFileLoader($container, new FileLocator(__DIR__));
         $configLoader->load('twig-plugin.yml');
+
+        $twig = $container->getDefinition('templating.engine.twig.environment');
+
+        foreach ($container->findTaggedServiceIds('twig.extension') as $id => $attributes) {
+            $twig->addMethodCall('addExtension', array(new Reference($id)));
+        }
     }
 }
