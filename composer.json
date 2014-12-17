@@ -9,5 +9,10 @@
     ],
     "require": {
         "symfony/twig-bridge": "~2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Viking\\TwigPlguin\\": "src/"
+        }
     }
 }
